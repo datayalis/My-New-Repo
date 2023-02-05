@@ -1,2 +1,2 @@
 # My-New-Repo
-A test respository
+A project repository, using a car advertisement dataset 
