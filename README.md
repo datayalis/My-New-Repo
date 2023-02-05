@@ -1,5 +1,5 @@
-# Sprint_4_Car_Web_App
-A project repository, using python code to view and modify a car advertisement dataset. 
+# Sprint 4 Project - Car Web App
+Project repository, using python code to view and modify a car advertisement dataset. 
 Requirements:
 
 How to launch:
