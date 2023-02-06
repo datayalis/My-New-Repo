@@ -5,7 +5,7 @@ import plotly_express as px
 import streamlit as st
 
 st.header('Final Web Application')
-st.header('Created using :green[_python_] virtual environments :sunglasses:')
+st.header('Created using [_python_] virtual environments :sunglasses:')
 
 df=pd.read_csv('vehicles_us.csv')
 df['manufacturer']=df['model'].apply(lambda x:
