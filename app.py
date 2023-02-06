@@ -23,6 +23,12 @@ fig = px.histogram(df, x='manufacturer', color='type')
 # display the figure with streamlit
 st.write(fig)
 
+st.header('Price Range of Vehicles Per Type')
+#creating a scatterplot
+fig2 = px.scatter(df, x='type', y='price')
+#displaying the scatterplot
+st.write(fig2)
+
 #histogram of cond vs model yr
 st.header('Histogram of `manufacturer` vs `cylinders`')
 fig = px.histogram(df, x='manufacturer', color='cylinders')
