@@ -5,4 +5,4 @@ Requirements:
 How to launch:
 Make sure requirements are downloaded and then run python or jupyter file. 
 
-URL:
+URL: https://sprint-4-isqs.onrender.com
