@@ -2,14 +2,11 @@ import streamlit as st
 import pandas as pd
 import plotly_express as px
 
-import streamlit as st
-
 st.header('Final Web Application')
 st.header('Created using [_python_] virtual environments :sunglasses:')
 
 df=pd.read_csv('vehicles_us.csv')
-df['manufacturer']=df['model'].apply(lambda x:
-x.split()[0])
+df['manufacturer']=df['model'].apply(lambda x: x.split()[0])
 
 # create a text header above the dataframe
 st.header('Data viewer') 
@@ -18,25 +15,38 @@ st.dataframe(df)
 
 #vehicle types by manuf, to see distrib of veh types
 st.header('Vehicle types by manufacturer')
+# get a list of car models
+model_list = sorted(df['model'].unique())
+# get user's input from a dropdown menu
+model = st.selectbox(
+                     label='Select model', # title of the select box
+                     options=model_list, # options listed in the select box
+                     index=model_list.index(model_list[0]) # default pre-selected option
+                     )
+
+# filter the dataframe by model
+mask_filter = df['model'] == model
+df_filtered = df[mask_filter]
+
 # create a plotly histogram figure
-fig = px.histogram(df, x='manufacturer', color='type')
+fig = px.histogram(df_filtered, x='manufacturer', color='type')
 # display the figure with streamlit
 st.write(fig)
 
 st.header('Price Range of Vehicles Per Type')
 #creating a scatterplot
-fig2 = px.scatter(df, x='type', y='price')
+fig2 = px.scatter(df_filtered, x='type', y='price')
 #displaying the scatterplot
 st.write(fig2)
 
 #histogram of cond vs model yr
 st.header('Histogram of `manufacturer` vs `cylinders`')
-fig = px.histogram(df, x='manufacturer', color='cylinders')
+fig = px.histogram(df_filtered, x='manufacturer', color='cylinders')
 st.write(fig)
 
 #histogram of odometer
 st.header('Histogram of `color`')
-fig = px.histogram(df, x='paint_color', color='manufacturer')
+fig = px.histogram(df_filtered, x='paint_color', color='manufacturer')
 st.write(fig)
 
 #compare price distrib btwn manuf
@@ -55,23 +65,6 @@ manufacturer_2 = st.selectbox(
                               options=manufac_list, 
                               index=manufac_list.index('hyundai')
                               )
+
 # filter the dataframe 
-mask_filter = (df['manufacturer'] == manufacturer_1) | (df['manufacturer'] == manufacturer_2)
-df_filtered = df[mask_filter]
-
-# add a checkbox if a user wants to normalize the histogram
-normalize = st.checkbox('Normalize histogram', value=False)
-if normalize:
-    histnorm = 'percent'
-else:
-    histnorm = None
-
-# create a plotly histogram figure
-fig = px.histogram(df_filtered,
-                      x='days_listed',
-                      nbins=30,
-                      color='manufacturer',
-                      histnorm=histnorm,
-                      barmode='overlay')
-# display the figure with streamlit
-st.write(fig)
+mask_filter = (df['manufacturer
