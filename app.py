@@ -67,4 +67,22 @@ manufacturer_2 = st.selectbox(
                               )
 
 # filter the dataframe 
-mask_filter = (df['manufacturer
+mask_filter = (df['manufacturer'] == manufacturer_1) | (df['manufacturer'] == manufacturer_2)
+df_filtered = df[mask_filter]
+
+# add a checkbox if a user wants to normalize the histogram
+normalize = st.checkbox('Normalize histogram', value=False)
+if normalize:
+    histnorm = 'percent'
+else:
+    histnorm = None
+
+# create a plotly histogram figure
+fig = px.histogram(df_filtered,
+                      x='days_listed',
+                      nbins=30,
+                      color='manufacturer',
+                      histnorm=histnorm,
+                      barmode='overlay')
+# display the figure with streamlit
+st.write(fig)
